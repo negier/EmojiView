@@ -194,7 +194,7 @@ public class EmojiUtil {
             "[织]",
             "[NO]",
             "[Good]",
-            "[爱你]",
+            "[Love]",
             "[来]",
             "[OK]",
             "[拳头]",
