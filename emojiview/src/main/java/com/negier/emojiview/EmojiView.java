@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class EmojiView extends FrameLayout implements EmojiRecyclerViewAdapter.OnPressListener {
+public class EmojiView extends FrameLayout implements EmojiRecyclerViewAdapter.OnItemClickListener {
     private Context context;
     private ViewPager mViewPager;
     private ViewPager.OnPageChangeListener onPageChangeListener;
@@ -37,7 +37,6 @@ public class EmojiView extends FrameLayout implements EmojiRecyclerViewAdapter.O
 
     public EmojiView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
-
     }
 
     public EmojiView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -107,7 +106,7 @@ public class EmojiView extends FrameLayout implements EmojiRecyclerViewAdapter.O
                 emojiList = new ArrayList<>(EmojiUtil.provideEmojis().subList(fromIndex, toIndex));
                 emojiList.add(deleteEmoji);
                 adapter = new EmojiRecyclerViewAdapter(emojiList);
-                adapter.setOnClickListener(EmojiView.this);
+                adapter.setOnItemClickListener(EmojiView.this);
                 recyclerView.setAdapter(adapter);
 
                 container.addView(emojiPager);
@@ -147,7 +146,7 @@ public class EmojiView extends FrameLayout implements EmojiRecyclerViewAdapter.O
     }
 
     @Override
-    public void onClick(Emoji emoji) {
+    public void onItemClick(Emoji emoji) {
         if (emoji == deleteEmoji) {
             delete();
             return;
@@ -162,7 +161,7 @@ public class EmojiView extends FrameLayout implements EmojiRecyclerViewAdapter.O
     private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
     @Override
-    public void onLongClick(final Emoji emoji, boolean touch) {
+    public void onItemLongClick(final Emoji emoji, boolean touch) {
         if (emoji == deleteEmoji) {
             isLongDelete = touch;
             if (touch) {

@@ -24,4 +24,9 @@ public class MainActivity extends AppCompatActivity {
         mEmojiView.setOutputSource(mEditText);
     }
 
+    @Override
+    protected void onDestroy() {
+        mEmojiView.clear();
+        super.onDestroy();
+    }
 }

@@ -27,32 +27,30 @@ public class EmojiRecyclerViewAdapter extends RecyclerView.Adapter<EmojiRecycler
     @Override
     public void onBindViewHolder(@NonNull EmojiRecyclerViewAdapter.ViewHolder viewHolder, final int i) {
         viewHolder.imageView.setImageResource(emojiList.get(i).getResId());
-        viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onPressListener != null) {
-                    onPressListener.onClick(emojiList.get(i));
+        if (onItemClickListener != null) {
+            viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onItemClick(emojiList.get(i));
                 }
-            }
-        });
-        viewHolder.imageView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (onPressListener != null) {
-                    onPressListener.onLongClick(emojiList.get(i),true);
+            });
+            viewHolder.imageView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    onItemClickListener.onItemLongClick(emojiList.get(i), true);
+                    return false;
                 }
-                return false;
-            }
-        });
-        viewHolder.imageView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction()==MotionEvent.ACTION_UP||event.getAction()==MotionEvent.ACTION_CANCEL){
-                    onPressListener.onLongClick(emojiList.get(i),false);
+            });
+            viewHolder.imageView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+                        onItemClickListener.onItemLongClick(emojiList.get(i), false);
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
+        }
     }
 
     @Override
@@ -69,14 +67,15 @@ public class EmojiRecyclerViewAdapter extends RecyclerView.Adapter<EmojiRecycler
         }
     }
 
-    interface OnPressListener {
-        void onClick(Emoji emoji);
-        void onLongClick(Emoji emoji, boolean b);
+    interface OnItemClickListener {
+        void onItemClick(Emoji emoji);
+
+        void onItemLongClick(Emoji emoji, boolean touch);
     }
 
-    private OnPressListener onPressListener;
+    private OnItemClickListener onItemClickListener;
 
-    public void setOnClickListener(OnPressListener onClickListener) {
-        this.onPressListener = onClickListener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }
