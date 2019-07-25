@@ -43,7 +43,7 @@ public class EmojiView extends FrameLayout implements EmojiRecyclerViewAdapter.O
         super(context, attrs, defStyleAttr);
 
         this.context = context;
-        pages = (int) Math.ceil(EmojiUtil.emojiList.size() / (rows * columns - 1));
+        pages = (int) Math.ceil(EmojiUtils.provideEmojis().size() / (rows * columns - 1));
         deleteEmoji = new Emoji(R.mipmap.face_delete, "[删除]");
 
         init();
@@ -102,8 +102,8 @@ public class EmojiView extends FrameLayout implements EmojiRecyclerViewAdapter.O
                 recyclerView.setLayoutManager(new GridLayoutManager(container.getContext(), 7));
                 int fromIndex = position * (rows * columns - 1);
                 int toIndex = (position + 1) * (rows * columns - 1);
-                toIndex = toIndex > EmojiUtil.provideEmojis().size() ? EmojiUtil.provideEmojis().size() : toIndex;
-                emojiList = new ArrayList<>(EmojiUtil.provideEmojis().subList(fromIndex, toIndex));
+                toIndex = toIndex > EmojiUtils.provideEmojis().size() ? EmojiUtils.provideEmojis().size() : toIndex;
+                emojiList = new ArrayList<>(EmojiUtils.provideEmojis().subList(fromIndex, toIndex));
                 emojiList.add(deleteEmoji);
                 adapter = new EmojiRecyclerViewAdapter(emojiList);
                 adapter.setOnItemClickListener(EmojiView.this);
@@ -137,7 +137,7 @@ public class EmojiView extends FrameLayout implements EmojiRecyclerViewAdapter.O
         String rightPart = content.substring(start);
         leftPart += emoji.getKey();
         content = leftPart + rightPart;
-        editText.setText(EmojiUtil.obtainImageSpannableString(this.getContext(), content));
+        editText.setText(EmojiUtils.obtainImageSpannableString(this.getContext(), content));
         editText.setSelection(leftPart.length());
     }
 

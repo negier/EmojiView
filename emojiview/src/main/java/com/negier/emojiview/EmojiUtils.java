@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class EmojiUtil {
+public class EmojiUtils {
     private static final int[] emojiResIds = {
             R.mipmap.d_aini,
             R.mipmap.d_aoteman,
@@ -226,7 +226,7 @@ public class EmojiUtil {
             "[月亮]",
     };
 
-    public static List<Emoji> emojiList;
+    private static List<Emoji> emojiList;
     private static Map<String,Integer> emojiMap;
     static {
         emojiList = new ArrayList<>();
