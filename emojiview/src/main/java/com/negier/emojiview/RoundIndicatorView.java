@@ -10,21 +10,21 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class RoundIndicatorView extends FrameLayout implements IIndicatorView{
+public class RoundIndicatorView extends FrameLayout implements IIndicatorView {
     private Context context;
     private int indicatorDistance;
     private ImageView mRoundIndicator;
     private LinearLayout mRoundIndicatorBg;
 
-    public RoundIndicatorView( @NonNull Context context) {
-        this(context,null);
+    public RoundIndicatorView(@NonNull Context context) {
+        this(context, null);
     }
 
-    public RoundIndicatorView(@NonNull Context context,  @Nullable AttributeSet attrs) {
-        this(context, attrs,0);
+    public RoundIndicatorView(@NonNull Context context, @Nullable AttributeSet attrs) {
+        this(context, attrs, 0);
     }
 
-    public RoundIndicatorView( @NonNull Context context,  @Nullable AttributeSet attrs, int defStyleAttr) {
+    public RoundIndicatorView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         this.context = context;
@@ -36,9 +36,9 @@ public class RoundIndicatorView extends FrameLayout implements IIndicatorView{
         mRoundIndicatorBg = view.findViewById(R.id.round_indicator_bg);
     }
 
-    private int dp2px(float dp){
-        float density=context.getResources().getDisplayMetrics().density;
-        int px=(int) (dp*density+0.5f);
+    private int dp2px(float dp) {
+        float density = context.getResources().getDisplayMetrics().density;
+        int px = (int) (dp * density + 0.5f);
         return px;
     }
 
@@ -48,7 +48,7 @@ public class RoundIndicatorView extends FrameLayout implements IIndicatorView{
             ImageView imageView = new ImageView(context);
             imageView.setBackgroundResource(R.drawable.shape_round_indicator_bg);
             mRoundIndicatorBg.addView(imageView);
-            if (i != 0){
+            if (i != 0) {
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();
                 layoutParams.leftMargin = indicatorDistance;
                 imageView.setLayoutParams(layoutParams);
@@ -58,7 +58,7 @@ public class RoundIndicatorView extends FrameLayout implements IIndicatorView{
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        mRoundIndicator.setTranslationX((mRoundIndicator.getWidth()+indicatorDistance)*position +
-                Math.round((mRoundIndicator.getWidth()+indicatorDistance)*positionOffset));
+        mRoundIndicator.setTranslationX((mRoundIndicator.getWidth() + indicatorDistance) * position +
+                Math.round((mRoundIndicator.getWidth() + indicatorDistance) * positionOffset));
     }
 }

@@ -43,13 +43,13 @@ public class EmojiView extends FrameLayout implements EmojiRecyclerViewAdapter.O
         super(context, attrs, defStyleAttr);
 
         this.context = context;
-        pages = (int) Math.ceil(EmojiUtils.provideEmojis().size() / (rows * columns - 1));
+        pages = (int) Math.ceil(EmojiUtils.provideEmojis().size() *1f / (rows * columns - 1));
         deleteEmoji = new Emoji(R.mipmap.face_delete, "[删除]");
 
         init();
     }
 
-    public void setOutputSource(EditText editText) {
+    public void setTarget(EditText editText) {
         this.editText = editText;
     }
 

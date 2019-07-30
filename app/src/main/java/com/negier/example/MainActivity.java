@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         mEditText = (EditText) findViewById(R.id.edit_text);
         mEmojiView = (EmojiView) findViewById(R.id.emoji_view);
-        mEmojiView.setOutputSource(mEditText);
+        mEmojiView.setTarget(mEditText);
     }
 
     @Override
