@@ -14,6 +14,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EmojiUtils {
+    private EmojiUtils(){
+    }
     private static final int[] emojiResIds = {
             R.mipmap.d_aini,
             R.mipmap.d_aoteman,
